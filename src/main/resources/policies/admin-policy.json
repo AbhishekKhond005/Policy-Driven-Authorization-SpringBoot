@@ -1,0 +1,26 @@
+{
+  "rules": [
+    {
+      "name": "Admin Full Access",
+      "resource": "/api/admin/**",
+      "actions": ["GET", "POST", "PUT", "DELETE", "PATCH"],
+      "conditions": [
+        { "attribute": "role", "operator": "EQUALS", "value": "ROLE_ADMIN" }
+      ]
+    },
+    {
+      "name": "Profile Self-Service",
+      "resource": "/api/profile/**",
+      "actions": ["GET", "PUT"],
+      "conditions": [
+        { "attribute": "current_user", "operator": "EQUALS", "value": "resource_owner", "type": "DYNAMIC" }
+      ]
+    },
+    {
+      "name": "Public Endpoints",
+      "resource": "/api/public/**",
+      "actions": ["GET"],
+      "conditions": []
+    }
+  ]
+}
