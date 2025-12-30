@@ -1,0 +1,30 @@
+{
+  "rules": [
+    {
+      "name": "Admin Rule",
+      "resource": "/api/admin/**",
+      "actions": ["GET"],
+      "conditions": [
+        {
+          "attribute": "role",
+          "operator": "EQUALS",
+          "value": "ADMIN",
+          "type": "LITERAL"
+        }
+      ]
+    },
+    {
+      "name": "Dynamic Owner Rule",
+      "resource": "/api/profile/**",
+      "actions": ["GET"],
+      "conditions": [
+        {
+          "attribute": "resource_owner",
+          "operator": "EQUALS",
+          "value": "current_user",
+          "type": "DYNAMIC"
+        }
+      ]
+    }
+  ]
+}
