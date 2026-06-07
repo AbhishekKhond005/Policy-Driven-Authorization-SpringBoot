@@ -232,18 +232,6 @@ src/main/java/com/policy/engine/
 
 ---
 
-## Commit History
-
-```
-2025-01-15  Migrate project to Spring Boot framework
-2025-03-10  Integrate Spring Security with policy-driven authorization
-2025-05-25  Add REST API demo layer and sample policy definitions
-2025-08-01  Add classpath-aware policy loaders and multi-file support
-2025-10-15  Add comprehensive integration guide and README
-```
-
----
-
 ## Requirements
 
 - Java 17+
