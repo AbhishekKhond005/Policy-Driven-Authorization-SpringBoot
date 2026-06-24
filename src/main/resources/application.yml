@@ -1,9 +1,0 @@
-server:
-  port: 8080
-
-policy:
-  file: classpath:policies/admin-policy.json
-
-spring:
-  main:
-    banner-mode: off

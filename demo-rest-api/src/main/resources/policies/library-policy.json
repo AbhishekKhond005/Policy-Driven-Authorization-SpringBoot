@@ -1,0 +1,35 @@
+{
+  "rules": [
+    {
+      "name": "Public Book Listing",
+      "resource": "/api/public/**",
+      "actions": ["GET"],
+      "priority": 1000,
+      "effect": "ALLOW",
+      "audit": false,
+      "conditions": []
+    },
+    {
+      "name": "Admin Full Access",
+      "resource": "/api/admin/**",
+      "actions": ["GET", "POST", "PUT", "DELETE"],
+      "priority": 100,
+      "effect": "ALLOW",
+      "audit": true,
+      "conditions": [
+        { "attribute": "role", "operator": "EQUALS", "value": "ROLE_ADMIN" }
+      ]
+    },
+    {
+      "name": "Any Authenticated User Can View Books",
+      "resource": "/api/books/**",
+      "actions": ["GET"],
+      "priority": 200,
+      "effect": "ALLOW",
+      "audit": false,
+      "conditions": [
+        { "attribute": "role", "operator": "EQUALS", "value": "ROLE_USER" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "rules": [
+    {
+      "name": "User Profile Access",
+      "resource": "/api/profile/**",
+      "actions": ["GET"],
+      "priority": 200,
+      "effect": "ALLOW",
+      "audit": true,
+      "conditions": [
+        { "attribute": "resource_owner", "operator": "EQUALS", "value": "current_user", "type": "DYNAMIC" }
+      ]
+    },
+    {
+      "name": "User Profile Edit",
+      "resource": "/api/profile/**",
+      "actions": ["PUT"],
+      "priority": 200,
+      "effect": "ALLOW",
+      "audit": true,
+      "conditions": [
+        { "attribute": "resource_owner", "operator": "EQUALS", "value": "current_user", "type": "DYNAMIC" }
+      ]
+    },
+    {
+      "name": "Public Endpoints",
+      "resource": "/api/public/**",
+      "actions": ["GET"],
+      "priority": 1000,
+      "effect": "ALLOW",
+      "audit": false,
+      "conditions": []
+    }
+  ]
+}
