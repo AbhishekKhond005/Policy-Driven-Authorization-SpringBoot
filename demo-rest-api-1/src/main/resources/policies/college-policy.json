@@ -1,0 +1,54 @@
+{
+  "version": "2.0",
+  "description": "College admin service access policies",
+  "defaultDeny": true,
+  "rules": [
+    {
+      "name": "Public Info",
+      "resource": "/api/public/**",
+      "actions": ["GET"],
+      "priority": 1000,
+      "effect": "ALLOW",
+      "audit": false,
+      "conditions": []
+    },
+    {
+      "name": "Admin Full Access",
+      "resource": "/api/admin/**",
+      "actions": ["GET", "POST", "PUT", "DELETE"],
+      "priority": 100,
+      "effect": "ALLOW",
+      "audit": true,
+      "roles": ["ADMIN"]
+    },
+    {
+      "name": "Faculty View Students",
+      "resource": "/api/students/**",
+      "actions": ["GET"],
+      "priority": 200,
+      "effect": "ALLOW",
+      "audit": false,
+      "roles": ["FACULTY", "ADMIN"]
+    },
+    {
+      "name": "Students View Own Profile",
+      "resource": "/api/students/{id}",
+      "actions": ["GET"],
+      "priority": 300,
+      "effect": "ALLOW",
+      "audit": false,
+      "roles": ["STUDENT"],
+      "conditions": [
+        { "attribute": "current_user", "operator": "EQUALS", "value": "alice" }
+      ]
+    },
+    {
+      "name": "Courses View",
+      "resource": "/api/courses/**",
+      "actions": ["GET"],
+      "priority": 400,
+      "effect": "ALLOW",
+      "roles": ["STUDENT", "FACULTY", "ADMIN"]
+    }
+  ]
+}

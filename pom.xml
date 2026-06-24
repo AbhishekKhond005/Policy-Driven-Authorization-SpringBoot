@@ -26,8 +26,8 @@
         <module>policy-starter</module>
         <module>policy-gateway</module>
         <module>policy-admin</module>
-        <module>demo-rest-api</module>
-        <module>policy-samples</module>
+        <module>demo-rest-api-1</module>
+        <module>demo-rest-api-2</module>
     </modules>
 
     <dependencyManagement>

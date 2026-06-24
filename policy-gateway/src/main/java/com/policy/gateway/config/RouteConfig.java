@@ -22,32 +22,48 @@ public class RouteConfig {
     @PostConstruct
     public void initDefaultRoutes() {
         // Register default service targets
-        ServiceTarget userService = new ServiceTarget();
-        userService.setServiceId("user-service");
-        userService.setBaseUrl("http://localhost:8081");
-        routeRegistry.registerService(userService);
+        ServiceTarget collegeService = new ServiceTarget();
+        collegeService.setServiceId("college-service");
+        collegeService.setBaseUrl("http://localhost:8081");
+        routeRegistry.registerService(collegeService);
 
-        ServiceTarget feeService = new ServiceTarget();
-        feeService.setServiceId("fee-service");
-        feeService.setBaseUrl("http://localhost:8082");
-        routeRegistry.registerService(feeService);
+        ServiceTarget marksFeeService = new ServiceTarget();
+        marksFeeService.setServiceId("marks-fee-service");
+        marksFeeService.setBaseUrl("http://localhost:8082");
+        routeRegistry.registerService(marksFeeService);
 
         // Register default route mappings
-        RouteMapping usersRoute = new RouteMapping();
-        usersRoute.setId("users-api");
-        usersRoute.setIncomingPath("/api/users/**");
-        usersRoute.setTargetUrl("http://localhost:8081");
-        usersRoute.setMethods(Set.of("GET", "POST", "PUT", "DELETE"));
-        usersRoute.setStripPrefix(true);
-        routeRegistry.registerRoute(usersRoute);
+        RouteMapping studentsRoute = new RouteMapping();
+        studentsRoute.setId("students-api");
+        studentsRoute.setIncomingPath("/api/students/**");
+        studentsRoute.setTargetUrl("http://localhost:8081");
+        studentsRoute.setMethods(Set.of("GET", "POST"));
+        studentsRoute.setStripPrefix(true);
+        routeRegistry.registerRoute(studentsRoute);
+
+        RouteMapping coursesRoute = new RouteMapping();
+        coursesRoute.setId("courses-api");
+        coursesRoute.setIncomingPath("/api/courses/**");
+        coursesRoute.setTargetUrl("http://localhost:8081");
+        coursesRoute.setMethods(Set.of("GET"));
+        coursesRoute.setStripPrefix(true);
+        routeRegistry.registerRoute(coursesRoute);
 
         RouteMapping feesRoute = new RouteMapping();
         feesRoute.setId("fees-api");
         feesRoute.setIncomingPath("/api/fees/**");
         feesRoute.setTargetUrl("http://localhost:8082");
-        feesRoute.setMethods(Set.of("GET", "POST"));
+        feesRoute.setMethods(Set.of("GET"));
         feesRoute.setStripPrefix(true);
         routeRegistry.registerRoute(feesRoute);
+
+        RouteMapping marksRoute = new RouteMapping();
+        marksRoute.setId("marks-api");
+        marksRoute.setIncomingPath("/api/marks/**");
+        marksRoute.setTargetUrl("http://localhost:8082");
+        marksRoute.setMethods(Set.of("GET"));
+        marksRoute.setStripPrefix(true);
+        routeRegistry.registerRoute(marksRoute);
 
         log.info("Default routes and services initialized");
     }

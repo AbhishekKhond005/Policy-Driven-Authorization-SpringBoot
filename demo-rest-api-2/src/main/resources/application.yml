@@ -1,0 +1,11 @@
+server:
+  port: 8082
+
+policy:
+  file: classpath:policies/service-policy.json
+  cache:
+    ttl-ms: 60000
+
+spring:
+  main:
+    banner-mode: off

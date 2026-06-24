@@ -1,0 +1,53 @@
+{
+  "version": "2.0",
+  "description": "Marks and fees service access policies",
+  "defaultDeny": true,
+  "rules": [
+    {
+      "name": "Admin Full Access",
+      "resource": "/api/admin/**",
+      "actions": ["GET", "POST", "PUT", "DELETE"],
+      "priority": 100,
+      "effect": "ALLOW",
+      "roles": ["ADMIN"]
+    },
+    {
+      "name": "Faculty View All Marks",
+      "resource": "/api/marks/**",
+      "actions": ["GET"],
+      "priority": 200,
+      "effect": "ALLOW",
+      "roles": ["FACULTY", "ADMIN"]
+    },
+    {
+      "name": "Students View Own Marks",
+      "resource": "/api/marks/{studentId}",
+      "actions": ["GET"],
+      "priority": 300,
+      "effect": "ALLOW",
+      "roles": ["STUDENT"],
+      "conditions": [
+        { "attribute": "current_user", "operator": "EQUALS", "value": "{studentId}" }
+      ]
+    },
+    {
+      "name": "Students View Own Fees",
+      "resource": "/api/fees/{studentId}",
+      "actions": ["GET"],
+      "priority": 300,
+      "effect": "ALLOW",
+      "roles": ["STUDENT"],
+      "conditions": [
+        { "attribute": "current_user", "operator": "EQUALS", "value": "{studentId}" }
+      ]
+    },
+    {
+      "name": "Faculty View Fees",
+      "resource": "/api/fees/**",
+      "actions": ["GET"],
+      "priority": 250,
+      "effect": "ALLOW",
+      "roles": ["FACULTY", "ADMIN"]
+    }
+  ]
+}
